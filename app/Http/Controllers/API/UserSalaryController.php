@@ -47,4 +47,6 @@ class UserSalaryController extends Controller
         return response()->json([UserSalaryResources::collection($UserSalary)]);
     }
 
+    public function 
+
 }

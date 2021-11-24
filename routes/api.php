@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::resource('users', App\Http\Controllers\API\AuthController::class);
     Route::resource('informations', App\http\Controllers\API\UserInformationController::class);
+    Route::resource('salary', App\http\Controllers\API\UserSalaryController::class);
 
     //API for search users informations
     Route::get('/search/{name}', [App\http\Controllers\API\UserInformationController::class, 'search']);

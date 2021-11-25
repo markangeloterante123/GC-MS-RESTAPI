@@ -13,17 +13,17 @@ class CreateUserSalariesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_users_salary', function (Blueprint $table) {
+        Schema::create('user_salaries', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
             $table->string('payslip_link');
             $table->double('basic_salary');
             $table->double('food_allowance');
             $table->double('position_allowance');
-            $table->date('effective_date');
-            $table->date('end_date');
+            $table->string('effective_date');
+            $table->string('end_date');
             $table->text('notes');
-            $table->integer('salaray_status');
+            $table->integer('salary_status');
             $table->timestamps();
         });
     }

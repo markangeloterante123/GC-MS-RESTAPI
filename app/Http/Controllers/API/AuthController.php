@@ -26,11 +26,11 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors());       
+            return response()->json($validator->errors(), 401);       
         }
 
         $user = User::create([
-            'user_id'=>000,
+            'user_id'=> 000,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'is_admin' => 0
@@ -58,30 +58,31 @@ class AuthController extends Controller
             $user = User::where('email', $request['email'])->firstOrFail();
             $token = $user->createToken('auth_token')->plainTextToken;
 
-            $aut = ['role'=>$user->is_admin,'email' => $user->email,'user_id' => $user->user_id,'message' => 'Hi '.$user->email.', welcome to home','access_token' => $token, 'token_type' => 'Bearer', 'is_admin' => $user->is_admin, ];
-            $aut_error = ['role'=>$user->is_admin,'email' => $user->email,'user_id' => $user->user_id,];
-            if($user->is_admin == 1){
-                return response()
-                ->json(['auth' => $aut,'Role'=>'User' ]);
-            }
-            elseif($user->is_admin == 2){
-                return response()
-                ->json(['auth' => $aut,'Role'=>'Project Manager' ]);
-            }
-            elseif($user->is_admin == 3){
-                return response()
-                ->json(['auth' => $aut,'Role'=>'Management' ]);
-            }
-            elseif($user->is_admin == 4){
-                return response()
-                ->json(['auth' => $aut,'Role'=>'Admin/Hr' ]);
-            }
-            else {
-                auth()->user()->tokens()->delete();
-                return response()
-                ->json(['auth'=>$aut_error, 'message' => 'Hi '.$user->email.', your login session are temporally canceled ask your Admin/HR to set your account Role']);
-            }
-
+            $aut = ['role'=>$user->is_admin,'email' => $user->email,'user_id' => $user->user_id,'access_token' => $token, 'token_type' => 'Bearer', 'is_admin' => $user->is_admin, ];
+            // $aut_error = ['role'=>$user->is_admin,'email' => $user->email,'user_id' => $user->user_id,'access_token' => $token,];
+            // if($user->is_admin == 1){
+            //     return response()
+            //     ->json(['user' => $aut,'Role'=>'User' ]);
+            // }
+            // elseif($user->is_admin == 2){
+            //     return response()
+            //     ->json(['user' => $aut,'Role'=>'Project Manager' ]);
+            // }
+            // elseif($user->is_admin == 3){
+            //     return response()
+            //     ->json(['user' => $aut,'Role'=>'Management' ]);
+            // }
+            // elseif($user->is_admin == 4){
+            //     return response()
+            //     ->json(['user' => $aut,'Role'=>'Admin/Hr' ]);
+            // }
+            // else {
+            //     //auth()->user()->tokens()->delete();
+            //     return response()
+            //     ->json(['user'=>$aut_error, 'message' => 'Hi '.$user->email.', your login session are temporally canceled ask your Admin/HR to set your account Role']);
+            // }
+            return response()
+            ->json(['user'=>$aut]);
             
         }
         
@@ -114,7 +115,7 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors());       
+            return response()->json($validator->errors(), 404);       
         }
 
         $user->user_id = $request->user_id;

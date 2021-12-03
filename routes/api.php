@@ -22,7 +22,7 @@ Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login'])
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
         return auth()->user();
-    });
+    });    
 
     Route::resource('users', App\Http\Controllers\API\AuthController::class);
     Route::resource('informations', App\http\Controllers\API\UserInformationController::class);
@@ -34,3 +34,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // API route for logout user
     Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
 });
+

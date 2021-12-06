@@ -15,8 +15,8 @@ class CreateUserInformationTable extends Migration
     {
         Schema::create('user_information', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->unique();
-            $table->string('gc_id');
+            $table->integer('user_id')->unique();
+            $table->integer('gc_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name');
@@ -27,7 +27,7 @@ class CreateUserInformationTable extends Migration
             $table->string('spouce_work');
             $table->string('spouce_name');
             $table->string('spouce_birthdate');
-            $table->string('no_children');
+            $table->integer('no_children');
             $table->string('personal_email');
             $table->string('phone_no');
             $table->string('cel_no');
@@ -38,7 +38,7 @@ class CreateUserInformationTable extends Migration
             $table->string('emergency_contact');
             $table->string('work_email');
             $table->enum('position',['Front-End Developer', 'Back-End Developer', 'Full-Stack Developer', 'Designer','Human Resources']);
-            $table->string('level');
+            $table->integer('level');
             $table->string('team_id');
             $table->string('404_records_link');
             $table->string('pay_slip_link');
